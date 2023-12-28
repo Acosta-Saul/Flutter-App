@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/page02.dart';
 
-void main() => runApp(renuevApp());
+void main() => runApp(const renuevApp());
 
 // Widget que hace que corra la Aplicacion
 class renuevApp extends StatelessWidget {
@@ -9,7 +9,7 @@ class renuevApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
         debugShowCheckedModeBanner: false, title: "RenuevApp", home: home());
   }
 }
@@ -28,7 +28,7 @@ class _homeState extends State<home> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-            title: Center(
+            title: const Center(
           child: Text("RenuevApp"),
         )),
         body: inicio(context));
@@ -36,38 +36,39 @@ class _homeState extends State<home> {
 }
 
 Widget inicio(context) {
+  var elevatedButton = ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const page02()));
+      },
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.all(25.0),
+      ),
+      child: const Text("Renovar Acta de Nacimiento",
+          style: TextStyle(fontSize: 18.0, fontStyle: FontStyle.normal)));
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       // Texto principal
-      Center(
+      const Center(
           child: Text("Bienvenido a RenuevApp",
               style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold))),
 
       // Para dar un espaciado entre Widgets
-      SizedBox(
+      const SizedBox(
         height: 30.0,
       ),
 
       // Logo de la Aplicacion
       Center(child: Image.asset("assets/Logo.PNG", fit: BoxFit.scaleDown)),
-      SizedBox(
+      const SizedBox(
         height: 50.0,
       ),
 
       // Botón de Renovar
-      ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => page02()));
-          },
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(25.0),
-          ),
-          child: Text("Renovar Acta de Nacimiento",
-              style: TextStyle(fontSize: 18.0, fontStyle: FontStyle.normal))),
+      elevatedButton,
 
-      SizedBox(
+      const SizedBox(
         height: 20.0,
       ),
 
@@ -77,10 +78,10 @@ Widget inicio(context) {
             instrucciones(context);
           },
           style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(25.0),
-            fixedSize: Size(280, 55),
+            padding: const EdgeInsets.all(25.0),
+            fixedSize: const Size(280, 55),
           ),
-          child: Text("Instrucciones",
+          child: const Text("Instrucciones",
               style: TextStyle(fontSize: 18.0, fontStyle: FontStyle.normal)))
     ],
   );
@@ -91,8 +92,8 @@ void instrucciones(BuildContext context) {
       context: context,
       builder: (BuildContext) {
         return AlertDialog(
-          title: Text("Instrucciones"),
-          content: Text(
+          title: const Text("Instrucciones"),
+          content: const Text(
               "1)Tener en la galeria la partida de nacimiento a renovar\n\n2)Seleccionar la imagen de la galeria (debe tener buena calidad)\n\n3)Esperar que procese la imagen\n\n4)Si la imagen se proceso con éxito se generará una partida totalmente renovada con un código QR único para el usuario",
               style: TextStyle(wordSpacing: 2.0)),
           actions: [
@@ -100,7 +101,7 @@ void instrucciones(BuildContext context) {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text("Entiendo"))
+                child: const Text("Entiendo"))
           ],
         );
       });
