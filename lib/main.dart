@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_aplicaccion/conexion.dart';
 import 'package:flutter_aplicaccion/page02.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -34,12 +35,40 @@ class _homeState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-            title: const Center(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Center(
           child: Text("RenuevApp"),
-        )),
-        body: inicio(context));
+        ),
+      ),
+      body: FutureBuilder<List>(
+        future: getPeople(),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text('Error al obtener datos'),
+            );
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(
+              child: Text('No hay datos disponibles'),
+            );
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final name =
+                    snapshot.data![index]['name'] ?? 'Nombre no disponible';
+                return Text(name);
+              },
+            );
+          }
+        }),
+      ),
+    );
   }
 }
 
