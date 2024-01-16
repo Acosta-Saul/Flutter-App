@@ -34,7 +34,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.text_recognization"  // Cambia por tu propio ID de aplicación
+        applicationId "com.renovacion.flutteraplicaccion"  // Cambia por tu propio ID de aplicación
         minSdkVersion 21
         targetSdkVersion 33  // Ajusta a la versión más reciente si es necesario
         versionCode flutterVersionCode.toInteger()
