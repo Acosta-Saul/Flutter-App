@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1032135953108",
+    "project_id": "renovacion-partida-nacmiento",
+    "storage_bucket": "renovacion-partida-nacmiento.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032135953108:android:031ece7027b740bac10941",
+        "android_client_info": {
+          "package_name": "com.renovacion.flutteraplicaccion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTe8Cdzpgxi3Mvu76m6zJFWLZqPlHJuZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
