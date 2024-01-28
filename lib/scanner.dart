@@ -1,3 +1,4 @@
+import 'dart:convert'; //Para convertir de map a JSON
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/firebase_options.dart';
@@ -5,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -78,7 +80,7 @@ class _ScannerState extends State<Scanner> {
                           padding: const EdgeInsets.only(top: 10),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
+                              primary: Color.fromARGB(235, 255, 234, 203),
                               onPrimary: Colors.grey,
                               shadowColor: Colors.grey[400],
                               elevation: 10,
@@ -105,7 +107,7 @@ class _ScannerState extends State<Scanner> {
                                     "Galería",
                                     style: TextStyle(
                                       fontSize: 13,
-                                      color: Colors.grey[600],
+                                      color: Colors.grey[600], //Blanco ostra
                                     ),
                                   ),
                                 ],
@@ -118,9 +120,9 @@ class _ScannerState extends State<Scanner> {
                           padding: const EdgeInsets.only(top: 10),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
+                              primary: Color.fromARGB(235, 255, 234, 203),
                               onPrimary: Colors.grey,
-                              shadowColor: Colors.grey[400],
+                              shadowColor: Color.fromARGB(235, 255, 234, 203),
                               elevation: 10,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -193,6 +195,7 @@ class _ScannerState extends State<Scanner> {
               List<Widget> widgets = [];
               for (final documento in documentos) {
                 final data = documento.data() as Map<String, dynamic>;
+                var id = documento.id;
                 var madre = {
                   'Cedula': data['madre']['cedula'],
                   'Nombre': data['madre']['nombre'],
@@ -203,11 +206,16 @@ class _ScannerState extends State<Scanner> {
                 };
                 var nombre = data['nombre'];
                 var fecha = data['fecha'];
+
+                //Pasa de map a JSON
+                String jsonData = json.encode(data);
                 widgets.add(
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      SizedBox(height: 40),
+                      Text('ID registro: ' + id),
                       SizedBox(height: 40),
                       Text('Datos de la Madre:'),
                       Text('Cédula: ${madre['Cedula']}'),
@@ -224,6 +232,11 @@ class _ScannerState extends State<Scanner> {
                       Text('Cédula: ${padre['Cedula']}'),
                       Text('Nombre: ${padre['Nombre']}'),
                       SizedBox(height: 20),
+                      QrImage(
+                        data: jsonData,
+                        version: QrVersions.auto,
+                        size: 200.0,
+                      )
                     ],
                   ),
                 );
