@@ -193,8 +193,10 @@ class _ScannerState extends State<Scanner> {
               }
               final documentos = snapshot.data!.docs;
               List<Widget> widgets = [];
+
               for (final documento in documentos) {
                 final data = documento.data() as Map<String, dynamic>;
+
                 var id = documento.id;
                 var madre = {
                   'Cedula': data['madre']['cedula'],
@@ -207,39 +209,50 @@ class _ScannerState extends State<Scanner> {
                 var nombre = data['nombre'];
                 var fecha = data['fecha'];
 
-                //Pasa de map a JSON
-                String jsonData = json.encode(data);
-                widgets.add(
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 40),
-                      Text('ID registro: ' + id),
-                      SizedBox(height: 40),
-                      Text('Datos de la Madre:'),
-                      Text('Cédula: ${madre['Cedula']}'),
-                      Text('Nombre: ${madre['Nombre']}'),
-                      SizedBox(height: 20),
-                      Text('Hijo: ' + nombre),
-                      Text('Fecha de Nacimiento: ' + fecha),
-                      SizedBox(height: 20),
-                      Text(
-                        'Cómo tan muchacho, yo lo veo a utede mui vien',
-                      ),
-                      SizedBox(height: 20),
-                      Text('Datos del Padre:'),
-                      Text('Cédula: ${padre['Cedula']}'),
-                      Text('Nombre: ${padre['Nombre']}'),
-                      SizedBox(height: 20),
-                      QrImage(
-                        data: jsonData,
-                        version: QrVersions.auto,
-                        size: 200.0,
-                      )
-                    ],
-                  ),
-                );
+                print(scannedText);
+
+                // Para probar si funciona la condicional
+                if (scannedText.contains(madre['Cedula']) &&
+                    scannedText.contains(padre['Cedula']) &&
+                    scannedText.contains(nombre)) {
+                  print('Si esta la cedula de los padres y el nombre del hijo');
+                }
+
+                /* Si el texto scaneado coincide con los datos de la BD entonces genera un QR único para dicho registro */
+                if (scannedText.contains(madre['Cedula']) &&
+                    scannedText.contains(padre['Cedula']) &&
+                    scannedText.contains(nombre)) {
+                  //Pasa de map a JSON
+                  String jsonData = json.encode(data);
+                  widgets.add(
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 40),
+                        Text('ID registro: ' + id),
+                        SizedBox(height: 40),
+                        Text('Datos de la Madre:'),
+                        Text('Cédula: ${madre['Cedula']}'),
+                        Text('Nombre: ${madre['Nombre']}'),
+                        SizedBox(height: 20),
+                        Text('Hijo: ' + nombre),
+                        Text('Fecha de Nacimiento: ' + fecha),
+                        SizedBox(height: 20),
+                        Text('Datos del Padre:'),
+                        Text('Cédula: ${padre['Cedula']}'),
+                        Text('Nombre: ${padre['Nombre']}'),
+                        SizedBox(height: 20),
+                        QrImage(
+                          data: jsonData,
+                          version: QrVersions.auto,
+                          size: 200.0,
+                        )
+                      ],
+                    ),
+                  );
+                  break;
+                }
               }
 
               return Center(
@@ -282,8 +295,6 @@ class _ScannerState extends State<Scanner> {
       final RecognizedText recognizedText =
           await textRecognizer.processImage(inputImage);
       textRecognizer.close();
-      print('La cadena de texto extraído de la imagen es: ' +
-          recognizedText.text);
 
       setState(() {
         scannedText = recognizedText.text;
