@@ -191,6 +191,7 @@ class _ScannerState extends State<Scanner> {
                   child: CircularProgressIndicator(),
                 );
               }
+
               final documentos = snapshot.data!.docs;
               List<Widget> widgets = [];
 
@@ -290,8 +291,6 @@ class _ScannerState extends State<Scanner> {
     try {
       final inputImage = InputImage.fromFilePath(image.path);
       final textRecognizer = GoogleMlKit.vision.textRecognizer();
-      // final List<TextBlock> recognizedText =
-      //     (await textRecognizer.processImage(inputImage)).blocks;
       final RecognizedText recognizedText =
           await textRecognizer.processImage(inputImage);
       textRecognizer.close();
