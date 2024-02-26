@@ -31,8 +31,21 @@ class _AdminState extends State<Admin> {
             child: ElevatedButton(
               onPressed: () async {
                 String result = (await scanner.scan()) ?? '';
-                print(
-                    result); // Aquí puedes hacer lo que quieras con el resultado del escaneo
+                if (result.isNotEmpty) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Resultado del escaneo'),
+                      content: Text(result),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text('Cerrar'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
               },
               child: Text(
                 "Escanear Código QR",
