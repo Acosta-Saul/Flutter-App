@@ -23,6 +23,27 @@ class _AdminState extends State<Admin> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text("Admin"),
+        actions: [
+          const SizedBox(
+            height: 30.0,
+          ),
+          ElevatedButton(
+              //Boton para cerrar sesion y que te redirija al login
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    (route) => false);
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(15.0),
+                fixedSize: const Size(280, 55),
+              ),
+              child: const Text("Cerrar sesion",
+                  style:
+                      TextStyle(fontSize: 18.0, fontStyle: FontStyle.normal)))
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

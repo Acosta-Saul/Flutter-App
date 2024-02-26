@@ -36,7 +36,7 @@ class _homeState extends State<home> {
                       (route) => false);
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(15.0),
                   fixedSize: const Size(280, 55),
                 ),
                 child: const Text("Cerrar sesion",
