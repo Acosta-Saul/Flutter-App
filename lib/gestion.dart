@@ -205,8 +205,9 @@ class DocumentDetailsScreen extends StatelessWidget {
 
   Future<void> _downloadPDF(BuildContext context) async {
     final pdf = await _generatePDF();
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/document_details.pdf');
+    final directory =
+        await getExternalStorageDirectory(); // Cambiar a la carpeta de descargas
+    final file = File('${directory!.path}/document_details.pdf');
     await file.writeAsBytes(await pdf.save());
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
