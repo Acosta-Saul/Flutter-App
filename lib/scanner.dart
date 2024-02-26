@@ -210,19 +210,16 @@ class _ScannerState extends State<Scanner> {
                 var nombre = data['nombre'];
                 var fecha = data['fecha'];
 
+                //Mostrar texto escaneado
                 print(scannedText);
 
-                // Para probar si funciona la condicional
+                /* Si el texto escaneado coincide con los datos de la BD, genera un QR único para dicho registro */
                 if (scannedText.contains(madre['Cedula']) &&
                     scannedText.contains(padre['Cedula']) &&
                     scannedText.contains(nombre)) {
-                  print('Si esta la cedula de los padres y el nombre del hijo');
-                }
+                  //Cambiar estado de la solicitud a "En espera"
+                  data.update('estado', (value) => 'En espera');
 
-                /* Si el texto scaneado coincide con los datos de la BD entonces genera un QR único para dicho registro */
-                if (scannedText.contains(madre['Cedula']) &&
-                    scannedText.contains(padre['Cedula']) &&
-                    scannedText.contains(nombre)) {
                   //Pasa de map a JSON
                   String jsonData = json.encode(data);
                   widgets.add(
@@ -232,6 +229,8 @@ class _ScannerState extends State<Scanner> {
                       children: [
                         SizedBox(height: 40),
                         Text('ID registro: ' + id),
+                        SizedBox(height: 40),
+                        Text('Estado del registro: ' + data['estado']),
                         SizedBox(height: 40),
                         Text('Datos de la Madre:'),
                         Text('Cédula: ${madre['Cedula']}'),
