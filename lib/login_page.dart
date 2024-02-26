@@ -6,6 +6,7 @@ import 'package:flutter_app/firebase_auth_services.dart';
 import 'package:flutter_app/sign_up_page.dart';
 import 'package:flutter_app/form_container_widget.dart';
 import 'home.dart';
+import 'admin.dart';
 // import 'package:flutter_app/toast.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -174,18 +175,57 @@ class _LoginPageState extends State<LoginPage> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    User? user = await _auth.signInWithEmailAndPassword(email, password);
+    var usuario = {'email': email, 'password': password};
 
-    setState(() {
-      _isSigning = false;
-    });
+    // Genera la instancia de la base de datos para comparar el email del usuario
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    if (user != null) {
-      // showToast(message: "User is successfully signed in");
-      Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (context) => home()), (route) => false);
-    } else {
-      // showToast(message: "some error occured");
+    try {
+      QuerySnapshot querySnapshot =
+          await firestore.collection('Usuarios').get();
+      var bandera = 'false';
+      // Iterar sobre los documentos de la colección
+      querySnapshot.docs.forEach((doc) {
+        // Obtener los datos de cada documento
+        Map<String, dynamic> userData = doc.data() as Map<String, dynamic>;
+
+        String nombre = userData['name'];
+        String correo = userData['email'];
+        String password = userData['password'];
+        String rol = userData['rol'];
+        // Ya existe el correo en la BD
+        if (usuario['email'] == correo && usuario['password'] == password) {
+          bandera = 'true';
+
+          if (rol == 'Usuario') {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => home()),
+                (route) => false);
+          } else {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => Admin()),
+                (route) => false);
+          }
+        }
+      });
+
+      if (bandera == 'false') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('¡Datos incorrectos!'),
+            duration: Duration(seconds: 10), // Duración del mensaje
+            backgroundColor: Color.fromARGB(255, 188, 0, 53),
+          ),
+        );
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()),
+            (route) => false);
+      }
+    } catch (e) {
+      print('Error al obtener datos: $e');
     }
   }
 }

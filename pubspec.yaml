@@ -23,6 +23,7 @@ dependencies:
   qr_flutter: ^4.0.0
   firebase_auth: ^4.3.0 # enabling authentication using passwords, phone numbers and identity providers like Google, Facebook and Twitter.
   firebase_storage: ^11.0.16 # plugin for Firebase Cloud Storage
+  flutter_barcode_scanner: ^2.0.0
 
 dev_dependencies:
   change_app_package_name: ^1.0.0
