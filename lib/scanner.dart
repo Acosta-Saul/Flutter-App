@@ -220,6 +220,9 @@ class _ScannerState extends State<Scanner> {
                   //Cambiar estado de la solicitud a "En espera"
                   data.update('estado', (value) => 'En espera');
 
+                  // Llama a la funcion para modificar el estado de la partida en espera en la BD
+                  Future<void> future = actualizarEstadoSolicitud(id);
+
                   //Pasa de map a JSON
                   String jsonData = json.encode(data);
                   widgets.add(
@@ -265,6 +268,13 @@ class _ScannerState extends State<Scanner> {
         ],
       ),
     );
+  }
+
+  //Funcion para modifcar el estado de la partida en la BD
+  Future<void> actualizarEstadoSolicitud(String id) async {
+    await FirebaseFirestore.instance.collection('EscanerBD').doc(id).update({
+      'estado': 'En espera',
+    });
   }
 
   void getImage(ImageSource source) async {
