@@ -26,6 +26,7 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   pdf:
   path_provider: 
+  qrscan:
 
 dev_dependencies:
   change_app_package_name: ^1.0.0

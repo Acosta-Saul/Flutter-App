@@ -5,9 +5,9 @@ import 'package:flutter_app/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_app/login_page.dart';
-import 'package:flutter_app/scanner.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'gestion.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
 
 class Admin extends StatefulWidget {
   const Admin({Key? key}) : super(key: key);
@@ -20,34 +20,43 @@ class _AdminState extends State<Admin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text("Admin"),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-                child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text("Escanear Código QR",
-                        style: TextStyle(
-                            fontSize: 18.0, fontStyle: FontStyle.normal)))),
-            const SizedBox(
-              height: 30.0,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text("Admin"),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: ElevatedButton(
+              onPressed: () async {
+                String result = (await scanner.scan()) ?? '';
+                print(
+                    result); // Aquí puedes hacer lo que quieras con el resultado del escaneo
+              },
+              child: Text(
+                "Escanear Código QR",
+                style: TextStyle(fontSize: 18.0, fontStyle: FontStyle.normal),
+              ),
             ),
-            Center(
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const gestion()));
-                    },
-                    child: const Text("Gestiona solicitudes de renovación",
-                        style: TextStyle(
-                            fontSize: 18.0, fontStyle: FontStyle.normal)))),
-          ],
-        ));
+          ),
+          SizedBox(height: 30.0),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => gestion()),
+                );
+              },
+              child: Text(
+                "Gestiona solicitudes de renovación",
+                style: TextStyle(fontSize: 18.0, fontStyle: FontStyle.normal),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
