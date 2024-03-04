@@ -217,11 +217,12 @@ class _ScannerState extends State<Scanner> {
                 if (scannedText.contains(madre['Cedula']) &&
                     scannedText.contains(padre['Cedula']) &&
                     scannedText.contains(nombre)) {
-                  //Cambiar estado de la solicitud a "En espera"
-                  data.update('estado', (value) => 'En espera');
-
                   // Llama a la funcion para modificar el estado de la partida en espera en la BD
-                  Future<void> future = actualizarEstadoSolicitud(id);
+                  //Future<void> future = actualizarEstadoSolicitud(id);
+                  actualizarEstadoSolicitud(id);
+
+                  //Llama a la funcion para guardar el texto de la partida en la BD
+                  guardarTextoPartida(id, scannedText);
 
                   //Pasa de map a JSON
                   String jsonData = json.encode(data);
@@ -232,8 +233,6 @@ class _ScannerState extends State<Scanner> {
                       children: [
                         SizedBox(height: 40),
                         Text('ID registro: ' + id),
-                        SizedBox(height: 40),
-                        Text('Estado del registro: ' + data['estado']),
                         SizedBox(height: 40),
                         Text('Datos de la Madre:'),
                         Text('Cédula: ${madre['Cedula']}'),
@@ -274,6 +273,13 @@ class _ScannerState extends State<Scanner> {
   Future<void> actualizarEstadoSolicitud(String id) async {
     await FirebaseFirestore.instance.collection('EscanerBD').doc(id).update({
       'estado': 'En espera',
+    });
+  }
+
+  //Guarda el texto del escaner en la BD
+  Future<void> guardarTextoPartida(String id, String scannedText) async {
+    await FirebaseFirestore.instance.collection('EscanerBD').doc(id).update({
+      'texto_escaner': scannedText,
     });
   }
 

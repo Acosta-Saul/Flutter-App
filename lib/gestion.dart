@@ -78,6 +78,7 @@ class _gestionState extends State<gestion> {
                 _buildDataWidget("Nombre de la madre:", madre['nombre']),
                 _buildDataWidget("Cédula de la madre:", madre['cedula']),
                 _buildDataWidget("Fecha:", data['fecha']),
+                _buildDataWidget("Ubicacion", data['ubicacion']),
                 _buildDataWidget("Nombre:", data['nombre']),
                 _buildDataWidget("Nombre del padre:", padre['nombre']),
                 _buildDataWidget("Cédula del padre:", padre['cedula']),
@@ -207,7 +208,7 @@ class DocumentDetailsScreen extends StatelessWidget {
     final pdf = await _generatePDF();
     final directory =
         await getExternalStorageDirectory(); // Cambiar a la carpeta de descargas
-    final file = File('${directory!.path}/document_details.pdf');
+    final file = File('${directory!.path}/Renovacion_Partida.pdf');
     await file.writeAsBytes(await pdf.save());
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -224,6 +225,11 @@ class DocumentDetailsScreen extends StatelessWidget {
           return pw.Center(
             child: pw.Column(
               children: [
+                pw.Text("PARTIDA DE NACIMIENTO"),
+                pw.SizedBox(height: 20),
+                pw.Text(
+                    "Segun la Resolucion numero 1165 con fecha 22-07-03 hago consta que hoy ${documentData['fecha']}, me ha sido presentado ante su despacho, un recien nacido de sexo ${documentData['sexo']} por el Ciudadano ${documentData['padre']['nombre']}; venezolano, casado de ${documentData['padre']['edad']} con cedula de identidad ${documentData['padre']['cedula']} y expuso que el bebe que presenta nacio el dia ${documentData['fecha']} en ${documentData['ubicacion']}; y lleva por nombre ${documentData['nombre']}. Que es su lujo y de su esposa: ${documentData['madre']['nombre']}, venezolana, casada de ${documentData['madre']['edad']}; con cedula de identidad ${documentData['madre']['cedula']}. El presente certificado se expide a petición del interesado, con la finalidad de acreditar su identidad, para los efectos legales oportunos."),
+                pw.SizedBox(height: 20),
                 pw.Text("ID del documento: $documentId"),
                 pw.SizedBox(height: 20),
                 pw.Text(
@@ -231,8 +237,6 @@ class DocumentDetailsScreen extends StatelessWidget {
                 pw.Text(
                     "Cédula de la madre: ${documentData['madre']['cedula']}"),
                 pw.Text("Fecha: ${documentData['fecha']}"),
-                pw.SizedBox(height: 20),
-                pw.Text("Información adicional..."),
               ],
             ),
           );
