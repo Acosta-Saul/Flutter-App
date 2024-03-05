@@ -221,14 +221,6 @@ class DocumentDetailsScreen extends StatelessWidget {
                 pw.SizedBox(height: 20),
                 pw.Text(
                     "Segun la Resolucion numero 1165 con fecha 22-07-03 hago consta que hoy ${documentData['fecha']}, me ha sido presentado ante su despacho, un recien nacido de sexo ${documentData['sexo']} por el Ciudadano ${documentData['padre']['nombre']}; venezolano, casado de ${documentData['padre']['edad']} años con cedula de identidad ${documentData['padre']['cedula']} y expuso que el bebe que presenta nacio el dia ${documentData['fecha']} en ${documentData['ubicacion']}; y lleva por nombre ${documentData['nombre']}. Que es su lujo y de su esposa: ${documentData['madre']['nombre']}, venezolana, casada de ${documentData['madre']['edad']}; con cedula de identidad ${documentData['madre']['cedula']}. El presente certificado se expide a petición del interesado, con la finalidad de acreditar su identidad, para los efectos legales oportunos."),
-                pw.SizedBox(height: 20),
-                pw.Text("ID del documento: $documentId"),
-                pw.SizedBox(height: 20),
-                pw.Text(
-                    "Nombre de la madre: ${documentData['madre']['nombre']}"),
-                pw.Text(
-                    "Cédula de la madre: ${documentData['madre']['cedula']}"),
-                pw.Text("Fecha: ${documentData['fecha']}"),
               ],
             ),
           );

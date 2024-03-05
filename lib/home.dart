@@ -34,7 +34,7 @@ class _homeState extends State<home> {
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(15.0),
-                  fixedSize: const Size(280, 55),
+                  fixedSize: const Size(250, 55),
                 ),
                 child: const Text("Cerrar sesion",
                     style:
