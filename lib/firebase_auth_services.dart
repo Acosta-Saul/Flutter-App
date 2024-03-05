@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-// import '../../../global/common/toast.dart';
-
 class FirebaseAuthService {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -12,11 +10,7 @@ class FirebaseAuthService {
           email: email, password: password);
       return credential.user;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        // showToast(message: 'La direccion email esta actualmente en uso');
-      } else {
-        // showToast(message: 'Ocurrio un error: ${e.code}');
-      }
+      print(e);
     }
     return null;
   }

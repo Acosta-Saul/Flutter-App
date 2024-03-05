@@ -1,16 +1,8 @@
-import 'dart:math';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_app/login_page.dart';
-import 'package:flutter_app/scanner.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
 // PDF
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 class gestion extends StatefulWidget {
@@ -228,7 +220,7 @@ class DocumentDetailsScreen extends StatelessWidget {
                 pw.Text("PARTIDA DE NACIMIENTO"),
                 pw.SizedBox(height: 20),
                 pw.Text(
-                    "Segun la Resolucion numero 1165 con fecha 22-07-03 hago consta que hoy ${documentData['fecha']}, me ha sido presentado ante su despacho, un recien nacido de sexo ${documentData['sexo']} por el Ciudadano ${documentData['padre']['nombre']}; venezolano, casado de ${documentData['padre']['edad']} con cedula de identidad ${documentData['padre']['cedula']} y expuso que el bebe que presenta nacio el dia ${documentData['fecha']} en ${documentData['ubicacion']}; y lleva por nombre ${documentData['nombre']}. Que es su lujo y de su esposa: ${documentData['madre']['nombre']}, venezolana, casada de ${documentData['madre']['edad']}; con cedula de identidad ${documentData['madre']['cedula']}. El presente certificado se expide a petición del interesado, con la finalidad de acreditar su identidad, para los efectos legales oportunos."),
+                    "Segun la Resolucion numero 1165 con fecha 22-07-03 hago consta que hoy ${documentData['fecha']}, me ha sido presentado ante su despacho, un recien nacido de sexo ${documentData['sexo']} por el Ciudadano ${documentData['padre']['nombre']}; venezolano, casado de ${documentData['padre']['edad']} años con cedula de identidad ${documentData['padre']['cedula']} y expuso que el bebe que presenta nacio el dia ${documentData['fecha']} en ${documentData['ubicacion']}; y lleva por nombre ${documentData['nombre']}. Que es su lujo y de su esposa: ${documentData['madre']['nombre']}, venezolana, casada de ${documentData['madre']['edad']}; con cedula de identidad ${documentData['madre']['cedula']}. El presente certificado se expide a petición del interesado, con la finalidad de acreditar su identidad, para los efectos legales oportunos."),
                 pw.SizedBox(height: 20),
                 pw.Text("ID del documento: $documentId"),
                 pw.SizedBox(height: 20),

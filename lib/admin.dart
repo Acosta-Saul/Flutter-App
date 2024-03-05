@@ -1,11 +1,6 @@
-import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/firebase_options.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_app/login_page.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
 import 'gestion.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 

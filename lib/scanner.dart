@@ -1,32 +1,10 @@
 import 'dart:convert'; //Para convertir de map a JSON
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       theme: ThemeData(
-//         primarySwatch: Colors.green,
-//       ),
-//       home: const Scanner(),
-//     );
-//   }
-// }
 
 class Scanner extends StatefulWidget {
   const Scanner({Key? key}) : super(key: key);
@@ -80,8 +58,8 @@ class _ScannerState extends State<Scanner> {
                           padding: const EdgeInsets.only(top: 10),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(235, 255, 234, 203),
-                              onPrimary: Colors.grey,
+                              primary: Color.fromARGB(235, 6, 88, 229),
+                              onPrimary: Colors.blue,
                               shadowColor: Colors.grey[400],
                               elevation: 10,
                               shape: RoundedRectangleBorder(
@@ -102,12 +80,13 @@ class _ScannerState extends State<Scanner> {
                                   Icon(
                                     Icons.image,
                                     size: 30,
+                                    color: Colors.white,
                                   ),
                                   Text(
                                     "Galería",
                                     style: TextStyle(
                                       fontSize: 13,
-                                      color: Colors.grey[600], //Blanco ostra
+                                      color: Colors.white, //Blanco ostra
                                     ),
                                   ),
                                 ],
@@ -120,8 +99,8 @@ class _ScannerState extends State<Scanner> {
                           padding: const EdgeInsets.only(top: 10),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(235, 255, 234, 203),
-                              onPrimary: Colors.grey,
+                              primary: Color.fromARGB(235, 6, 88, 229),
+                              onPrimary: Colors.blue,
                               shadowColor: Color.fromARGB(235, 255, 234, 203),
                               elevation: 10,
                               shape: RoundedRectangleBorder(
@@ -142,12 +121,13 @@ class _ScannerState extends State<Scanner> {
                                   Icon(
                                     Icons.camera_alt,
                                     size: 30,
+                                    color: Colors.white,
                                   ),
                                   Text(
                                     "Cámara",
                                     style: TextStyle(
                                       fontSize: 13,
-                                      color: Colors.grey[600],
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ],
@@ -232,18 +212,18 @@ class _ScannerState extends State<Scanner> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(height: 40),
-                        Text('ID registro: ' + id),
+                        // Text('ID registro: ' + id),
                         SizedBox(height: 40),
-                        Text('Datos de la Madre:'),
-                        Text('Cédula: ${madre['Cedula']}'),
-                        Text('Nombre: ${madre['Nombre']}'),
+                        // Text('Datos de la Madre:'),
+                        // Text('Cédula: ${madre['Cedula']}'),
+                        // Text('Nombre: ${madre['Nombre']}'),
                         SizedBox(height: 20),
-                        Text('Hijo: ' + nombre),
-                        Text('Fecha de Nacimiento: ' + fecha),
+                        // Text('Hijo: ' + nombre),
+                        // Text('Fecha de Nacimiento: ' + fecha),
                         SizedBox(height: 20),
-                        Text('Datos del Padre:'),
-                        Text('Cédula: ${padre['Cedula']}'),
-                        Text('Nombre: ${padre['Nombre']}'),
+                        // Text('Datos del Padre:'),
+                        // Text('Cédula: ${padre['Cedula']}'),
+                        // Text('Nombre: ${padre['Nombre']}'),
                         SizedBox(height: 20),
                         QrImage(
                           data: jsonData,
