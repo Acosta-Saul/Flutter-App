@@ -66,9 +66,6 @@ class MyHomePage extends StatelessWidget {
                   Text('Hijo: ' + nombre),
                   Text('Fecha de Nacimiento: ' + fecha),
                   SizedBox(height: 20),
-                  Text(
-                    'Cómo tan muchacho, yo lo veo a utede mui vien',
-                  ),
                   SizedBox(height: 20),
                   Text('Datos del Padre:'),
                   Text('Cédula: ${padre['Cedula']}'),
